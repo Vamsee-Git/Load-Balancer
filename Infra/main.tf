@@ -38,14 +38,13 @@ module "ec2_instance" {
   instance_type     = "t2.micro"
   subnet_ids        = module.vpc.subnet_ids
   security_group_id = aws_security_group.instance.id
- 
-  user_data = [
-    file("${path.module}/user_data/user_data_1.sh"),
-    file("${path.module}/user_data/user_data_2.sh"),
-    file("${path.module}/user_data/user_data_3.sh")
+  user_data         = [
+    file("${path.module}/user_data/user_data_1.sh"),
+    file("${path.module}/user_data/user_data_2.sh"),
+    file("${path.module}/user_data/user_data_3.sh")
   ]
-
 }
+
 
 module "target_group" {
   source       = "./modules/target_group"

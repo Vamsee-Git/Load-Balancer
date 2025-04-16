@@ -1,11 +1,11 @@
 provider "aws" {
-  region = "us-west-1"
+  region = "us-west-2"
 }
 
 module "vpc" {
   source            = "./modules/vpc"
   cidr_block        = "10.0.0.0/16"
-  availability_zones = ["us-west-1a", "us-west-1b", "us-west-1c"]
+  availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
 }
 
 resource "aws_security_group" "instance" {

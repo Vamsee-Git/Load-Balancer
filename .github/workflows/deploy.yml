@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  AWS_REGION: "us-west-1"
+  AWS_REGION: "us-west-2"
   TF_VERSION: "1.5.0"
   
 permissions:
@@ -30,7 +30,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::877786395093:role/github-oidc-vamsee
-          aws-region: us-west-1
+          aws-region: us-west-2
 
       # Install Terraform
       - name: Install Terraform

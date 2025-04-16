@@ -9,6 +9,25 @@ resource "aws_subnet" "subnet" {
   availability_zone = element(var.availability_zones, count.index)
 }
 
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+}
+
+resource "aws_route_table_association" "a" {
+  count          = 3
+  subnet_id      = element(aws_subnet.subnet.*.id, count.index)
+  route_table_id = aws_route_table.public.id
+}
+
 output "vpc_id" {
   value = aws_vpc.main.id
 }

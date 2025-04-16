@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo yum update -y
-sudo amazon-linux-extras enable nginx1
+sudo amazon-linux-extras enable nginx
 sudo yum install -y nginx
               
 sudo mkdir -p /usr/share/nginx/html/register

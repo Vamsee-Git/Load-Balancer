@@ -1,4 +1,4 @@
-name: Terraform destroy
+name: Terraform deploy
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ permissions:
   
 jobs:
   terraform:
-    name: Terraform Destroy
+    name: Terraform Plan/Apply
     runs-on: ubuntu-latest
 
     steps:
@@ -48,13 +48,13 @@ jobs:
         run: |
           cd Infra
           terraform validate
-      # Run Terraform Plan to destroy
-      - name: Terraform Plan Destroy
+      # Run Terraform Plan
+      - name: Terraform Plan
         run: |
           cd Infra
-          terraform plan -destroy -var-file="../environments/dev/terraform.tfvars" -out=tfplan
-      # Run Terraform Apply to destroy
-      - name: Terraform Apply Destroy
+          terraform plan -var-file="../environments/dev/terraform.tfvars" -out=tfplan
+      # Run Terraform Apply (only on push to main)
+      - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: |
           cd Infra
